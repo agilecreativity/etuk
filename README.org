@@ -1,0 +1,109 @@
+** etuk - Simple driver of Selenium via Webica
+
+#+ATTR_HTML: title="Clojars"
+[[https://clojars.org/tuktuk][file:https://img.shields.io/clojars/v/etuk.svg]]
+
+#+ATTR_HTML: title="Jarkeeper"
+[[https://jarkeeper.com/agilecreativity/tuktuk][file:https://jarkeeper.com/agilecreativity/etuk/status.svg]]
+
+Clojure Selenium driver via Webica wrapper in Clojure.
+
+*** Basic Installation
+
+For this to work just open your command line and
+
+#+BEGIN_SRC sh
+cd ~/projects/
+
+# Clone the patched version of webica project
+git clone git@github.com:agilecreativity/etuk.git
+
+# Then build it to your local repository
+cd ~/projects/etuk
+
+# Install local version of the jar
+boot build-jar
+#+END_SRC
+
+*** Basic Usage
+
+- Excerpted from [[src/etuk/core.clj][core.clj]]
+
+#+BEGIN_SRC clojure
+  (ns etuk.core
+    (:require [etuk.browser-utils :refer [start-chrome-session start-firefox-session] :as but]
+              [etuk.core-wait :refer :all :as cwt]
+              [etuk.core-navigator :refer :all :as cnv]
+              [webica.remote-web-driver :as browser]
+              [webica.expected-conditions :as ec]
+              [webica.web-element :as element])
+    (:gen-class))
+
+  (defn download-selenium-jars
+    []
+    (start-chrome-session)
+    (browser/get "http://www.seleniumhq.org/")
+
+    ;; Click the big Download link
+    (cnv/navigate {:wdriver  (cwt/get-instance)
+                   :wfn      ec/presence-of-element-located
+                   :type     :css-selector
+                   :expr     "#sidebar > div.downloadBox > a"
+                   :act-name element/click
+                   :act-arg  nil})
+
+    ;; Then click on the download Selenium Java driver 3.3.0 version link
+    (cnv/navigate {:wdriver  (cwt/get-instance)
+                   :wfn      ec/presence-of-element-located
+                   :type     :css-selector
+                   :expr     "#mainContent > table:nth-child(13) > tbody > tr:nth-child(1) > td:nth-child(4) > a"
+                   :act-name element/click
+                   :act-arg  nil}))
+
+  (defn -main [& args]
+    (try
+      (download-selenium-jars)
+      (catch Exception e
+        (.printStackTrace e)
+        (println (str "Unexpected errors: " (.getMessage e))))))
+#+END_SRC
+
+*** Development
+
+**** Leiningen/Boot
+
+#+BEGIN_SRC clojure
+[etuk "0.1.0"]
+#+END_SRC
+
+**** Gradle
+
+#+BEGIN_SRC groovy
+compile "etuk:etuk:0.1.0"
+#+END_SRC
+
+**** Maven
+
+#+BEGIN_SRC xml
+<dependency>
+  <groupId>etuk</groupId>
+  <artifactId>etuk</artifactId>
+  <version>0.1.0</version>
+</dependency>
+#+END_SRC
+
+** Useful Links
+
+- [[http://selenium-python.readthedocs.io/api.html#desired-capabilities][desired-capabilities]]
+- [[http://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.support.expected_conditions][module-selenium.webdriver.support.expected_conditions]]
+
+** Warning:
+
+This is early version of the app, so things will changes without notice.
+
+** License
+
+Copyright © 2017 agilecreativity
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
