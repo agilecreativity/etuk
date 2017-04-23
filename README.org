@@ -12,8 +12,19 @@ Clojure Selenium driver via Webica wrapper in Clojure.
 
 For this to work just open your command line and
 
+**** You will need to make sure that =chromedriver= is installed in =/usr/local/bin=
+**** For Firefox drive you will need =geckodriver= and must be installed to =/usr/local/bin=
+
 #+BEGIN_SRC sh
 cd ~/projects/
+
+# First install the dependency locally
+git clone git@github.com:tmarble/webica.git
+
+cd ~/projects/webica
+
+# Install the library to the local Maven repositories
+boot build-jar
 
 # Clone the patched version of webica project
 git clone git@github.com:agilecreativity/etuk.git
@@ -99,7 +110,7 @@ compile "etuk:etuk:0.1.0"
 
 ** Warning:
 
-This is early version of the app, so things will changes without notice.
+This is very active and things will changes as this project evolve.
 
 ** License
 
