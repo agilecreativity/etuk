@@ -1,10 +1,10 @@
 ** etuk - Simple driver of Selenium via Webica
 
 #+ATTR_HTML: title="Clojars"
-[[https://clojars.org/tuktuk][file:https://img.shields.io/clojars/v/etuk.svg]]
+[[https://clojars.org/etuk][file:https://img.shields.io/clojars/v/etuk.svg]]
 
 #+ATTR_HTML: title="Jarkeeper"
-[[https://jarkeeper.com/agilecreativity/tuktuk][file:https://jarkeeper.com/agilecreativity/etuk/status.svg]]
+[[https://jarkeeper.com/agilecreativity/etuk][file:https://jarkeeper.com/agilecreativity/etuk/status.svg]]
 
 Clojure Selenium driver via Webica wrapper in Clojure.
 
