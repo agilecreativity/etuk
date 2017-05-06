@@ -40,27 +40,27 @@
   "Locate and a given element having a given type matching a given expression.
 
   a) with action that need no argument e.g. (element/click (browser/find-element (by/css-selector \"#.button-full\")))
-  (navigate {:wdriver  wdriver
-             :wfn      ec/presence-of-element-located
-             :type     :css-selector
-             :expr     \".button-full\"
-             :act-name element/click
-             :act-arg  nil})
+  (navigate :wdriver  wdriver
+            :wfn      ec/presence-of-element-located
+            :type     :css-selector
+            :expr     \".button-full\"
+            :act-name element/click
+            :act-arg  nil)
 
   b) with action that need argument e.g. (element/send-keys (browser/find-element (by/css-selector \"#login_email\"))) \"john@mailinator.com\")
 
-  (navigate {:wdriver  wdriver
-             :wfn      ec/presence-of-element-located
-             :type     :css-selector
-             :expr     \"#login_email\"
-             :act-name element/send-keys
-             :act-arg  \"john@mailinator.com\")}"
-  [{:keys [wdriver
-           wfn
-           type
-           expr
-           act-name
-           act-arg]}]
+  (navigate :wdriver  wdriver
+            :wfn      ec/presence-of-element-located
+            :type     :css-selector
+            :expr     \"#login_email\"
+            :act-name element/send-keys
+            :act-arg  \"john@mailinator.com\")"
+  [& {:keys [wdriver
+             wfn
+             type
+             expr
+             act-name
+             act-arg]}]
 
   `(if-not (nil? ~act-arg)
      (~act-name (locate-element ~wdriver ~wfn ~type ~expr) ~act-arg)
