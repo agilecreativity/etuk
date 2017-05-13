@@ -18,14 +18,20 @@ For this to work just open your command line and
 #+BEGIN_SRC sh
 cd ~/projects/
 
+# Clone the webica project locally
+git clone git@github.com:tmarble/webica.git
+
+# Build the library for use locally
+cd ~/projects/webica && boot build-jar
+
 # Clone the patched version of webica project
 git clone git@github.com:agilecreativity/etuk.git
 
 # Then build it to your local repository
-cd ~/projects/etuk
+cd ~/projects/etuk && boot build-jar
 
-# Install local version of the jar
-boot build-jar
+# For the taste of the usage try running the example (currently in =core.clj=)
+boot run
 #+END_SRC
 
 *** Basic Usage
