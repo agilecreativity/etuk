@@ -3,11 +3,12 @@
 
 (set-env! :resource-paths #{"src" "resources"}
           :source-paths   #{"src" "test"}
-          :dependencies   '[[org.clojure/clojure "1.9.0-alpha15"]
+          :dependencies   '[[org.clojure/clojure "1.9.0-alpha16"]
                             [org.clojure/data.xml "0.0.8"]
                             [org.clojure/data.csv "0.1.3"]
                             [org.clojure/tools.cli "0.3.5"]
-
+                            [org.clojure/spec.alpha "0.1.108"]
+                            [org.clojure/clojure "1.9.0-alpha16"]
                             [webica "3.0.1-clj0"]
                             [org.seleniumhq.selenium/selenium-java "3.0.1"]
                             [org.seleniumhq.selenium/selenium-server "3.0.1"]

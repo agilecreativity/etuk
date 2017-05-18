@@ -1,5 +1,6 @@
 (ns etuk.core-navigator
   (:require [webica.core :as w])
+  (:require [clojure.spec.alpha :as s])
   (:require [clojure.string :as str]
             [webica
              [by :as by]
@@ -8,6 +9,17 @@
              [remote-web-driver :as browser]
              [web-driver-wait :as wdriver]
              [web-element :as element]]))
+
+(s/def ::element-type #{:id
+                        :xpath
+                        :css-selector
+                        :name
+                        :tag-name
+                        :link-text
+                        :partial-link-text
+                        :class-name})
+
+(s/valid? ::element-type :id)
 
 (defn ^:private find-web-element
   "Locate an element identified by a given `locator` and return it."
@@ -18,6 +30,9 @@
 (defn ^:private find-element-by
   "Return the element located by a given type of expression"
   [type expr]
+  (if-not (s/valid? ::element-type type)
+    (throw (ex-info (s/explain-str ::element-type type)
+                    (s/explain-data ::element-type type))))
   (cond
     (= type :id)                (by/id expr)
     (= type :xpath)             (by/xpath expr)
