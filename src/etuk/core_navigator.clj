@@ -10,6 +10,7 @@
              [web-driver-wait :as wdriver]
              [web-element :as element]]))
 
+;; Add basic Clojure spec
 (s/def ::element-type #{:id
                         :xpath
                         :css-selector
@@ -19,15 +20,14 @@
                         :partial-link-text
                         :class-name})
 
-(s/valid? ::element-type :id)
-
 (defn ^:private find-web-element
   "Locate an element identified by a given `locator` and return it."
   [wdriver wait-fn locator]
   (.until wdriver (wait-fn locator))
   (browser/find-element locator))
 
-(defn ^:private find-element-by
+;; Note: originally, this method is private!
+(defn find-element-by
   "Return the element located by a given type of expression"
   [type expr]
   (if-not (s/valid? ::element-type type)
