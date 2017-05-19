@@ -1,12 +1,13 @@
-(ns etuk.core
-  (:require [etuk.browser-utils :refer [start-chrome-session start-firefox-session] :as but]
-            [etuk.core-wait :refer :all :as cwt]
-            [etuk.core-navigator :refer :all :as cnv]
-            [webica.remote-web-driver :as browser]
+(ns etuk.examples.download-selenium
+  (:gen-class)
+  (:require [etuk.browser-utils :as but :refer [start-chrome-session]]
+            [etuk.core-navigator :as cnv :refer :all]
+            [etuk.core-wait :as cwt :refer :all]
             [webica.expected-conditions :as ec]
-            [webica.web-element :as element])
-  (:gen-class))
+            [webica.remote-web-driver :as browser]
+            [webica.web-element :as element]))
 
+;; Download jars file from Selenium
 (defn download-selenium-jars
   []
   (start-chrome-session)
@@ -31,6 +32,8 @@
 (defn -main [& args]
   (try
     (download-selenium-jars)
+    (browser/quit)
+    (println "Done!")
     (catch Exception e
       (.printStackTrace e)
       (println (str "Unexpected errors: " (.getMessage e))))))

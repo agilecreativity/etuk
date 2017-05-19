@@ -23,4 +23,6 @@
                  [adzerk/boot-test "1.2.0" :scope "test"]
                  [adzerk/bootlaces "0.1.13" :scope "test"]
                  [org.clojure/spec.alpha "0.1.108"]
-                 [org.clojure/clojure "1.9.0-alpha16"]])
+                 [org.clojure/clojure "1.9.0-alpha16"]
+                 [easy-config "0.1.2"]
+                 ])

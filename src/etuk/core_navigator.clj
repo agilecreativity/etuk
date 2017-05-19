@@ -26,13 +26,16 @@
   (.until wdriver (wait-fn locator))
   (browser/find-element locator))
 
-;; Note: originally, this method is private!
+(defn- validate-element-type
+  [type]
+  (if-not (s/valid? ::element-type type)
+    (throw (ex-info (s/explain-str ::element-type type)
+                    (s/explain-data ::element-type type)))))
+
 (defn find-element-by
   "Return the element located by a given type of expression"
   [type expr]
-  (if-not (s/valid? ::element-type type)
-    (throw (ex-info (s/explain-str ::element-type type)
-                    (s/explain-data ::element-type type))))
+  (validate-element-type type)
   (cond
     (= type :id)                (by/id expr)
     (= type :xpath)             (by/xpath expr)
