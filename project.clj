@@ -8,10 +8,12 @@
                  ["maven-central" {:url "https://repo1.maven.org/maven2"}]]
   :mirrors []
   :url "http://github.com/agilecreativity/etuk"
-  :dependencies [[org.clojure/clojure "1.9.0-alpha15"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
                  [org.clojure/data.xml "0.0.8"]
                  [org.clojure/data.csv "0.1.3"]
                  [org.clojure/tools.cli "0.3.5"]
+                 [org.clojure/spec.alpha "0.1.108"]
+                 [org.clojure/clojure "1.9.0-alpha16"]
                  [webica "3.0.1-clj0"]
                  [org.seleniumhq.selenium/selenium-java "3.0.1"]
                  [org.seleniumhq.selenium/selenium-server "3.0.1"]
@@ -19,4 +21,8 @@
                  [sparkfund/boot-lein-generate "0.3.0"]
                  [me.raynes/fs "1.4.6"]
                  [adzerk/boot-test "1.2.0" :scope "test"]
-                 [adzerk/bootlaces "0.1.13" :scope "test"]])
+                 [adzerk/bootlaces "0.1.13" :scope "test"]
+                 [org.clojure/spec.alpha "0.1.108"]
+                 [org.clojure/clojure "1.9.0-alpha16"]
+                 [easy-config "0.1.2"]
+                 ])
