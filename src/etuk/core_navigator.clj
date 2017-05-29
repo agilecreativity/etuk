@@ -20,7 +20,7 @@
                         :partial-link-text
                         :class-name})
 
-(defn ^:private find-web-element
+(defn- find-web-element
   "Locate an element identified by a given `locator` and return it."
   [wdriver wait-fn locator]
   (.until wdriver (wait-fn locator))
