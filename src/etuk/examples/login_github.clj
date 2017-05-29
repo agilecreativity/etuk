@@ -22,7 +22,6 @@
 (defn login-github
   [config-file]
   (let [{:keys [url username password]} (read-config config-file)]
-    (println "FYI: your argument: " (list url username password))
     (starter-page url)
     (cnv/navigate :wdriver  (cwt/get-instance)
                   :wfn      ec/presence-of-element-located
