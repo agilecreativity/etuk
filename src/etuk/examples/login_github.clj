@@ -23,32 +23,32 @@
   [config-file]
   (let [{:keys [url username password]} (read-config config-file)]
     (starter-page url)
-    (cnv/navigate :wdriver  (cwt/get-instance)
-                  :wfn      ec/presence-of-element-located
-                  :type     :css-selector
-                  :expr     "#login_field"
-                  :act-name element/send-keys
-                  :act-arg  username)
+    (let [wdriver (cwt/get-instance)]
+      (cnv/navigate :wdriver  wdriver
+                    :wfn      ec/presence-of-element-located
+                    :type     :css-selector
+                    :expr     "#login_field"
+                    :act-name element/send-keys
+                    :act-arg  username)
 
-    (cnv/navigate :wdriver  (cwt/get-instance)
-                  :wfn      ec/presence-of-element-located
-                  :type     :css-selector
-                  :expr     "#password"
-                  :act-name element/send-keys
-                  :act-arg  password)
+      (cnv/navigate :wdriver  wdriver
+                    :wfn      ec/presence-of-element-located
+                    :type     :css-selector
+                    :expr     "#password"
+                    :act-name element/send-keys
+                    :act-arg  password)
 
-    (cnv/navigate :wdriver  (cwt/get-instance)
-                  :wfn      ec/presence-of-element-located
-                  :type     :css-selector
-                  :expr     "#login > form > div.auth-form-body.mt-3 > input.btn.btn-primary.btn-block"
-                  :act-name element/click
-                  :act-arg  nil)))
+      (cnv/navigate :wdriver  wdriver
+                    :wfn      ec/presence-of-element-located
+                    :type     :css-selector
+                    :expr     "#login > form > div.auth-form-body.mt-3 > input.btn.btn-primary.btn-block"
+                    :act-name element/click
+                    :act-arg  nil))))
 
 (defn -main
   [& args]
   (try
     (login-github (str (System/getenv "HOME") "/Dropbox/github.edn"))
-    ;;(browser/quit)
     (catch Exception e
       (.printStackTrace e)
       (println (str "Unexpected errors: " (.getMessage e))))))
