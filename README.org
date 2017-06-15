@@ -11,36 +11,35 @@ Clojure Selenium driver via Webica wrapper in Clojure.
 *** Basic Installation
 
 For this to work just open your command line and
-
 **** You will need to make sure that =chromedriver= is installed in =/usr/local/bin=
 **** For Firefox drive you will need =geckodriver= and must be installed to =/usr/local/bin=
 
-#+BEGIN_SRC sh
-cd ~/projects/
+ #+BEGIN_SRC sh
+ cd ~/projects/
 
-# Clone the webica project locally
-git clone git@github.com:tmarble/webica.git
+ # Clone the webica project locally
+ git clone git@github.com:tmarble/webica.git
 
-# Build the library for use locally
-cd ~/projects/webica && boot build-jar
+ # Build the library for use locally
+ cd ~/projects/webica && boot build-jar
 
-# Clone the patched version of webica project
-git clone git@github.com:agilecreativity/etuk.git
+ # Clone the patched version of webica project
+ git clone git@github.com:agilecreativity/etuk.git
 
-# Then build it to your local repository
-cd ~/projects/etuk && boot build-jar
+ # Then build it to your local repository
+ cd ~/projects/etuk && boot build-jar
 
-# For example of the api try =src/etuk/examples/*.clj= for more detail
-boot download-selenium
+ # For example of the api try =src/etuk/examples/*.clj= for more detail
+ boot download-selenium
 
-# To login to Github - need to setup sample configuration (edn file)
-# Adjust to your local path e.g. ~/Dropbox/login/github.edn
-# with content like the following
-# { :username "your-github-user"
-#   :password "your-password"
-#   :url "https://github.com/login" }
-boot login-github
-#+END_SRC
+ # To login to Github - need to setup sample configuration (edn file)
+ # Adjust to your local path e.g. ~/Dropbox/login/github.edn
+ # with content like the following
+ # { :username "your-github-user"
+ #   :password "your-password"
+ #   :url "https://github.com/login" }
+ boot login-github
+ #+END_SRC
 
 *** Basic Usage
 
