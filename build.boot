@@ -69,4 +69,4 @@
   "Search for some text on Google"
   []
   (with-pass-thru _
-    (etuk.examples.google-search/-main)))
+    (etuk.examples.google-search/-main "Github Emacs Trending")))
