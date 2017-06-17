@@ -1,29 +1,41 @@
 (ns etuk.examples.google-search
-  (:gen-class)
-  (:require [etuk.browser-utils :as but :refer [start-chrome-session
-                                                start-firefox-session]]
+  (:require [easy-config.core :as ecf]
+            [etuk.browser-utils :as but :refer [start-chrome-session]]
+            [etuk.core-navigator :as cnv :refer :all]
+            [etuk.core-wait :as cwt :refer :all]
+            [webica.expected-conditions :as ec]
             [webica.remote-web-driver :as browser]
-            [webica.web-driver :as driver]))
+            [webica.web-element :as element]))
 
-(defn google-search [driver]
-  ;; Using Chrome
+(defn- starter-page
+  "Navigate to the starter page"
+  [url]
   (start-chrome-session)
+  (browser/get url))
 
-  ;; Using Firefox is also possible
-  ;; (start-firefox-session)
+(defn google-search
+  [terms]
+  (let [url "https://www.google.com"]
+    (starter-page url)
+    (let [wdriver (cwt/get-instance)]
+      (cnv/navigate :wdriver  wdriver
+                    :wfn      ec/presence-of-element-located
+                    :type     :name
+                    :expr     "q"
+                    :act-name element/send-keys
+                    :act-arg  terms)
 
-  (browser/get "https://www.google.com/")
-  (let [driver (driver/get-instance)]
-    (let [selector (.findElement driver (org.openqa.selenium.By/name "q"))]
-      (.sendKeys selector (into-array ["Clojure Trending"]))
-      (.click (.findElement driver (org.openqa.selenium.By/name "btnG"))))))
+      (cnv/navigate :wdriver  wdriver
+                    :wfn      ec/presence-of-element-located
+                    :type     :name
+                    :expr     "btnG"
+                    :act-name element/click
+                    :act-arg  nil))))
 
-(defn -main [& args]
+(defn -main
+  [& args]
   (try
-    (let [driver (driver/get-instance)]
-      (do
-        (google-search driver)))
-    (println "Done!")
+    (google-search "Clojure Github Trending")
     (catch Exception e
       (.printStackTrace e)
       (println (str "Unexpected errors: " (.getMessage e))))))
