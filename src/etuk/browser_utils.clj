@@ -23,26 +23,32 @@
    set-chrome-driver-path default-chrome-driver)
   ([driver-path]
    (let [driver-prop "webdriver.chrome.driver"]
-     (System/setProperty driver-prop driver-path))))
+     (System/setProperty driver-prop driver-path)
+     ;; Return the driver path
+     driver-path)))
 
 (defn ^:private set-gecko-driver-path
   "Set the correct property for Firefox/Gecko to work properly."
   ([]
    set-gecko-driver-path default-firefox-driver)
   ([driver-path]
+   ;; Note: may be we need to use just one of this?
    (System/setProperty "webdriver.firefox.driver" driver-path)
-   (System/setProperty "webdriver.gecko.driver" driver-path)))
+   (System/setProperty "webdriver.gecko.driver" driver-path)
+   driver-path))
 
 ;; Public APIs
 
 (defn start-chrome-session
   "Start automation session using Google Chrome"
-  []
-  (set-chrome-driver-path)
-  (chrome/start-chrome))
+  ([]
+   (start-chrome-session (set-chrome-driver-path)))
+  ([driver-path]
+   (chrome/start-chrome driver-path)))
 
 (defn start-firefox-session
   "Start automation session using Firefox"
   []
+  ;; TODO: adjust this to make it similar to the start-chrome-session
   (set-gecko-driver-path)
   (firefox/start-firefox))

@@ -10,7 +10,7 @@
 
 (defn download-selenium-jars
   []
-  (start-chrome-session)
+  (start-chrome-session "/usr/lib/chromium/chromedriver")
 
   ;; If you are using Firefox
   ;;(start-firefox-session)
