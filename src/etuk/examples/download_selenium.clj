@@ -6,11 +6,12 @@
             [etuk.core-wait :as cwt :refer :all]
             [webica.expected-conditions :as ec]
             [webica.remote-web-driver :as browser]
-            [webica.web-element :as element]))
+            [webica.web-element :as element]
+            [cucl.core-utils :refer [find-binary]]))
 
 (defn download-selenium-jars
   []
-  (start-chrome-session "/usr/lib/chromium/chromedriver")
+  (start-chrome-session (find-binary "chromedriver"))
 
   ;; If you are using Firefox
   ;;(start-firefox-session)

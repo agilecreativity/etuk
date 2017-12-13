@@ -2,20 +2,23 @@
   (:require [webica.core :as w])
   (:require [webica
              [chrome-driver :as chrome]
-             [firefox-driver :as firefox]]))
-
-(defn ^:private is-windows?
-  "Check for the system type and return true if it is Windows based system."
-  []
-  (re-find #"windows" (clojure.string/lower-case (System/getProperty "os.name"))))
+             [firefox-driver :as firefox]]
+            [cucl.core-utils :refer [find-binary
+                                     is-windows?
+                                     is-linux?
+                                     is-macos?]]))
 
 (def ^:private default-chrome-driver
   "Default location for Chrome web driver."
-  (str (System/getenv "HOME") (if (is-windows?) "/apps/chromedriver.exe" "/apps/chromedriver")))
+  (if (is-windows?)
+    (str (System/getenv "HOME") "/apps/chromedriver.exe") ;; TODO: find better way to do this for Windows?
+    (find-binary "chromedriver")))
 
 (def ^:private default-firefox-driver
   "Default location for Firefox web driver. Note tested with Firefox 52.0.2"
-  (str (System/getenv "HOME") (if (is-windows?) "/apps/geckodriver.exe" "/apps/geckodriver")))
+  (if (is-windows?)
+    (str (System/getenv "HOME") "/apps/geckodriver.exe") ;; TODO: find better way to do this for Windows?
+    (find-binary "geckodriver")))
 
 (defn ^:private set-chrome-driver-path
   "Set the correct property for Google Chrome to work properly."

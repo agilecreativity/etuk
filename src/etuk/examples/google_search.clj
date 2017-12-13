@@ -5,12 +5,13 @@
             [etuk.core-wait :as cwt :refer :all]
             [webica.expected-conditions :as ec]
             [webica.remote-web-driver :as browser]
-            [webica.web-element :as element]))
+            [webica.web-element :as element]
+            [cucl.core-utils :refer [find-binary]]))
 
 (defn- starter-page
   "Navigate to the starter page"
   [url]
-  (start-chrome-session)
+  (start-chrome-session (find-binary "chromedriver"))
   (browser/get url))
 
 (defn- add-space-if-none-exist
@@ -52,3 +53,5 @@
     (catch Exception e
       (.printStackTrace e)
       (println (str "Unexpected errors: " (.getMessage e))))))
+
+;; (-main)

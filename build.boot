@@ -1,19 +1,20 @@
 (def project 'etuk)
-(def version "0.1.2-SNAPSHOT")
+(def version "0.1.3")
 
 (set-env! :resource-paths #{"src" "resources"}
           :source-paths   #{"src" "test"}
-          :dependencies   '[[org.clojure/clojure "1.9.0-alpha17"]
+          :dependencies   '[[org.clojure/clojure "1.9.0"]
                             [org.clojure/data.xml "0.2.0-alpha2"]
                             [org.clojure/data.csv "0.1.4"]
                             [org.clojure/tools.cli "0.3.5"]
                             [org.clojure/spec.alpha "0.1.123"]
-                            [webica "3.4.0-clj0"]
-                            [org.seleniumhq.selenium/selenium-java "3.4.0"]
-                            [org.seleniumhq.selenium/selenium-server "3.4.0"]
-                            [org.seleniumhq.selenium/selenium-firefox-driver "3.4.0"]
+                            [webica "3.8.1-clj0"]
+                            [org.seleniumhq.selenium/selenium-java "3.8.1"]
+                            [org.seleniumhq.selenium/selenium-server "3.8.1"]
+                            [org.seleniumhq.selenium/selenium-firefox-driver "3.8.1"]
                             [me.raynes/fs "1.4.6"]
                             [easy-config "0.1.2"]
+                            [cucl "0.1.0"]
                             [adzerk/boot-test "1.2.0" :scope "test"]
                             [adzerk/bootlaces "0.1.13" :scope "test"]])
 
